@@ -16,9 +16,17 @@ android {
             proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
         }
     }
+    repositories {
+        flatDir {
+            dirs 'libs'
+        }
+    }
 }
 
+
+
 dependencies {
+
     implementation fileTree(dir: 'libs', include: ['*.jar'])
     implementation 'com.android.support:appcompat-v7:26.1.0'
     implementation 'com.android.support:support-v4:26.1.0'
@@ -44,6 +52,7 @@ dependencies {
     compile 'com.google.firebase:firebase-core:16.0.0'
     compile 'com.balysv:material-ripple:1.0.2'
     compile 'org.twitter4j:twitter4j-stream:4.0.6'
+    implementation(name:'HERE-sdk', ext:'aar')
 
 }
 apply plugin: 'com.google.gms.google-services'

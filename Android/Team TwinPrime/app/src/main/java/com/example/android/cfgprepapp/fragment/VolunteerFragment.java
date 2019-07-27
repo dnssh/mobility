@@ -17,6 +17,9 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.webkit.WebSettings;
+import android.webkit.WebView;
+import android.webkit.WebViewClient;
 import android.widget.AdapterView;
 import android.widget.Button;
 import android.widget.CheckBox;
@@ -37,6 +40,10 @@ import com.example.android.cfgprepapp.data.HttpHandler;
 import com.example.android.cfgprepapp.location.GPSTracker;
 import com.example.android.cfgprepapp.sync.ReminderFirebaseJobService;
 import com.example.android.cfgprepapp.view.cpb.CircularProgressButton;
+import com.here.android.mpa.common.GeoCoordinate;
+import com.here.android.mpa.common.OnEngineInitListener;
+import com.here.android.mpa.mapping.MapFragment;
+import com.here.android.mpa.mapping.SupportMapFragment;
 
 import org.json.JSONArray;
 import org.json.JSONException;
@@ -47,6 +54,7 @@ import java.util.Map;
 
 import me.everything.providers.android.contacts.Contact;
 import me.everything.providers.core.Data;
+
 
 public class VolunteerFragment extends Fragment {
 
@@ -71,6 +79,7 @@ public class VolunteerFragment extends Fragment {
     private RecyclerView mRecyclerView;
     private ShelterListAdapter mShelterListAdapter;
     int count=0;
+    WebView myWebView;
 
     public VolunteerFragment() {
         // Required empty public constructor
@@ -87,6 +96,7 @@ public class VolunteerFragment extends Fragment {
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+
 
     }
 
@@ -211,6 +221,13 @@ public class VolunteerFragment extends Fragment {
         mRecyclerView.setHasFixedSize(true);
         mShelterListAdapter = new ShelterListAdapter(getActivity());
         mRecyclerView.setAdapter(mShelterListAdapter);
+        myWebView = (WebView) view.findViewById(R.id.webview);
+        String ipadd1 = getResources().getString(R.string.ipadd);
+        WebSettings webSettings = myWebView.getSettings();
+        webSettings.setJavaScriptEnabled(true);
+        myWebView.setWebViewClient(new WebViewClient());
+
+
         return view;
 
     }
@@ -451,6 +468,16 @@ public class VolunteerFragment extends Fragment {
         protected void onPostExecute(Void result) {
             super.onPostExecute(result);
             mShelterListAdapter.setTrainListData(ShelterListData,count,stringLatitude,stringLongitude);
+            String latString="",longString="";
+            for(int i=0;i<3;i++){
+                latString=latString+ShelterListData[i][2]+",";
+                longString=longString+ShelterListData[i][3]+",";
+            }
+            latString=latString+ShelterListData[ShelterListData.length-1][2];
+            longString=longString+ShelterListData[ShelterListData.length-1][3];
+            myWebView.loadUrl("http://192.168.43.62/CFGAPI/maps-api-for-javascript-examples-master/markers-on-the-map/demo.php?lati="+latString+"&longi="+longString);
+            Log.d("Link","http://192.168.43.62/CFGAPI/maps-api-for-javascript-examples-master/markers-on-the-map/demo.php?lati="+latString+"&longi="+longString);
+
         }
 
     }
