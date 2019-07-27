@@ -14,7 +14,7 @@ function startClustering(map, data) {
     return new H.clustering.DataPoint(item.latitude, item.longitude);
   });
 
-  
+
 
   // Create a clustering provider with custom options for clusterizing the input
   var clusteredDataProvider = new H.clustering.Provider(dataPoints, {
@@ -48,8 +48,8 @@ var defaultLayers = platform.createDefaultLayers();
 
 // Step 2: initialize a map
 var map = new H.Map(document.getElementById('map'), defaultLayers.vector.normal.map, {
-  center: new H.geo.Point(30.789, 33.790),
-  zoom: 2,
+  center: new H.geo.Point(19.07283, 72.88261),
+  zoom: 11,
   pixelRatio: window.devicePixelRatio || 1
 });
 // add a resize listener to make sure that the map occupies the whole container
@@ -68,18 +68,18 @@ var ui = H.ui.UI.createDefault(map, defaultLayers);
 // airports variable was injected at the page load
 
 
+startClustering(map, airports);
 
+// setInterval(function() {
 
-setInterval(function() {
+//   //your code
+//   setTimeout(() => {
+//     startClustering(map, airports);  
+//     airports[1].latitude += 1;
+//     airports[1].longitude += 1;
+//     console.log("fjjf");
+//   }, 2000);
 
-  //your code
-  setTimeout(() => {
-    startClustering(map, airports);  
-    airports[1].latitude += 1;
-    airports[1].longitude += 1;
-    console.log("fjjf");
-  }, 2000);
-  
-}, 5000); 
+// }, 5000); 
 
 
