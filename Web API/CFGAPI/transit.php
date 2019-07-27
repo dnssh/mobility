@@ -6,7 +6,7 @@ if(isset($_GET["lati"]) && !empty($_GET["lati"]) && isset($_GET["longi"]) && !em
     $lat=$_GET["lati"];
     $long=$_GET["longi"];
     curl_setopt_array($curl, array(
-    CURLOPT_URL => "https://transit.api.here.com/v3/stations/by_geocoord.json?app_id=PUT_YOUR_APPID_HERE&center=".$lat.",".$long."&radius=350&max=6",
+    CURLOPT_URL => "https://transit.api.here.com/v3/stations/by_geocoord.json?app_code=-m2u-WtekXMw7_RRzqgk9w&app_id=5OlIinUno1IDAv9IKvre&center=".$lat.",".$long."&radius=350&max=6",
     CURLOPT_RETURNTRANSFER => true,
     CURLOPT_ENCODING => "",
     CURLOPT_MAXREDIRS => 10,

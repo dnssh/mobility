@@ -62,7 +62,8 @@ public class ShelterListAdapter extends RecyclerView.Adapter<ShelterListAdapter.
                     String lati = mTrainListData[adapterPosition][2];
                     String longi = mTrainListData[adapterPosition][3];
                     Intent intent = new Intent(android.content.Intent.ACTION_VIEW,
-                            Uri.parse("http://maps.google.com/maps?saddr=" + stringLatitude + "," + stringLongitude + "&daddr=" + lati + "," + longi));
+                            Uri.parse("https://www.here.com/directions/drive/start:"+stringLatitude+","+stringLongitude+"/end:"+lati+","+longi));
+                    /*Uri.parse("http://maps.google.com/maps?saddr=" + stringLatitude + "," + stringLongitude + "&daddr=" + lati + "," + longi));*/
                     contextG.startActivity(intent);
                     break;
                 case R.id.contact:
